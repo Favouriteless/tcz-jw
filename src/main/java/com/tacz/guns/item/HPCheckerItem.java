@@ -1,4 +1,4 @@
-package com.tacz.guns.item;
+/*package com.tacz.guns.item;
 
 import com.tacz.guns.world.ExplodedBlocksStorage;
 import net.minecraft.core.BlockPos;
@@ -25,3 +25,4 @@ public class HPCheckerItem extends Item {
         return super.onItemUseFirst(stack, context);
     }
 }
+*/

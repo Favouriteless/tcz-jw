@@ -31,7 +31,7 @@ public class ModCreativeTabs {
                 output.accept(ModItems.TARGET.get());
                 output.accept(ModItems.STATUE.get());
                 output.accept(ModItems.TARGET_MINECART.get());
-                output.accept(ModItems.HP_CHECKER.get());
+                //output.accept(ModItems.HP_CHECKER.get());
                // output.accept(ModItems.MAGTEST.get());
                 AmmoBoxItem.fillItemCategory(output);
             }).build());

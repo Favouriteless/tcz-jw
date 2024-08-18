@@ -22,7 +22,7 @@ import com.tacz.guns.util.HitboxHelper;
 import com.tacz.guns.util.TacHitResult;
 import com.tacz.guns.util.block.BlockRayTrace;
 import com.tacz.guns.util.block.ProjectileExplosion;
-import com.tacz.guns.world.ExplodedBlocksStorage;
+import com.tacz.guns.world.DamageBlockSaveData;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.FriendlyByteBuf;
@@ -483,9 +483,9 @@ public class EntityKineticBullet extends Projectile implements IEntityAdditional
             return;
         }
 
-        if (ExplodedBlocksStorage.damageBlock(getCommandSenderWorld(), pos, blockDamage)<=0){
+        if (DamageBlockSaveData.get(level()).damageBlock(getCommandSenderWorld(), pos, blockDamage)<=0){
             getCommandSenderWorld().destroyBlock(pos, true);
-            ExplodedBlocksStorage.removeBlock(getCommandSenderWorld(), pos);
+            DamageBlockSaveData.get(level()).removeBlock(pos);
         }
         // 爆炸
         if (this.hasExplosion) {

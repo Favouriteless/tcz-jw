@@ -1,4 +1,4 @@
-package com.tacz.guns.world;
+/*package com.tacz.guns.world;
 
 import com.tacz.guns.GunMod;
 import com.tacz.guns.api.block.IBulletBreakable;
@@ -95,3 +95,4 @@ public class ExplodedBlocksStorage {
         }
     }
 }
+*/
