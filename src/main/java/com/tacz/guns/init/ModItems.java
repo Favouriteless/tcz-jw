@@ -83,6 +83,8 @@ public class ModItems {
     public static final RegistryObject<Item> METAL_SCRAP = ITEMS.register("metal_scrap", () -> new ConstructionMaterial(new Item.Properties()));
     public static final RegistryObject<Item> ARMORED_SCRAP = ITEMS.register("armored_scrap", () -> new ConstructionMaterial(new Item.Properties()));
 
+    public static final RegistryObject<Item> MAGAZINE = ITEMS.register("magazine", () -> new CustomItem(new Item.Properties(), "magazine"));
+
 
 
     @SubscribeEvent
