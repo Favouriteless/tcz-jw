@@ -89,7 +89,7 @@ public class WallFloorItem extends BlockItem {
         for (BlockPos pos : blockPosList) {
             if (!level.getBlockState(pos).canBeReplaced()) {
                 Player player = blockPlaceContext.getPlayer();
-                player.displayClientMessage(Component.literal("Space Occupied"), true);
+                player.displayClientMessage(Component.literal("Espacio Ocupado..."), true);
                 return false;
             }
         }
@@ -102,7 +102,7 @@ public class WallFloorItem extends BlockItem {
             Block block = level.getBlockState(floorPos).getBlock();
             if(block instanceof WallHatch || block instanceof WallFloor){
                 Player player = blockPlaceContext.getPlayer();
-                player.displayClientMessage(Component.literal("Hatch or Floor Already Exist"), true);
+                player.displayClientMessage(Component.literal("Una Trampilla o Suelo ya existe."), true);
                 return false;
             }
         }

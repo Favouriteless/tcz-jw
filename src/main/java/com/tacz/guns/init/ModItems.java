@@ -77,6 +77,8 @@ public class ModItems {
     public static final RegistryObject<Item> DEBUGGER = ITEMS.register("debugger", ()-> new Debugger(new Item.Properties()));
     public static final RegistryObject<Item> SUPER_HAMMER = ITEMS.register("super_hammer", ()-> new SuperHammer(new Item.Properties()));
 
+    //public static final RegistryObject<Item> SKIN_TOOL = ITEMS.register("skin_tool", ()-> new SkinTool(new Item.Properties()));
+
     public static final RegistryObject<Item> STRAW_SCRAP = ITEMS.register("straw_scrap", () -> new ConstructionMaterial(new Item.Properties()));
     public static final RegistryObject<Item> WOOD_SCRAP = ITEMS.register("wood_scrap", () -> new ConstructionMaterial(new Item.Properties()));
     public static final RegistryObject<Item> STONE_SCRAP = ITEMS.register("stone_scrap", () -> new ConstructionMaterial(new Item.Properties()));

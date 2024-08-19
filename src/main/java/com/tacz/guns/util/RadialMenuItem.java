@@ -31,7 +31,7 @@ public class RadialMenuItem {
     }
 
     public Component getComponent(){
-        return Component.translatable("gui.justwalls.super_hammer." + name);
+        return Component.translatable("gui.tacz.super_hammer." + name);
     }
 
     public ItemStack getItemToRender(){

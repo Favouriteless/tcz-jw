@@ -68,7 +68,7 @@ public class WallDoorFrameItem extends BlockItem {
         for (BlockPos pos : blockPosList) {
             if (!level.getBlockState(pos).canBeReplaced()) {
                 Player player = blockPlaceContext.getPlayer();
-                player.displayClientMessage(Component.literal("Space Occupied"), true);
+                player.displayClientMessage(Component.literal("Espacio Ocupado..."), true);
                 return false;
             }
         }
@@ -80,7 +80,7 @@ public class WallDoorFrameItem extends BlockItem {
         for(BlockPos pillarPos: pillarPosList){
             if(!(level.getBlockState(pillarPos).getBlock() instanceof WallPillar)){
                 Player player = blockPlaceContext.getPlayer();
-                player.displayClientMessage(Component.literal("No Pillar Nearby"), true);
+                player.displayClientMessage(Component.literal("¡No existen Pilares cerca!"), true);
                 return false;
             }
         }

@@ -38,7 +38,7 @@ public class WallPillarItem extends BlockItem {
 
     @Override
     public void appendHoverText(ItemStack itemStack, @Nullable Level level, List<Component> list, TooltipFlag tooltipFlag) {
-        list.add(Component.translatable("tooltip.justwalls.pillar_height").append(String.valueOf(this.height)));
+        list.add(Component.translatable("tooltip.tacz.pillar_height").append(String.valueOf(this.height)));
         super.appendHoverText(itemStack, level, list, tooltipFlag);
     }
 
@@ -90,7 +90,7 @@ public class WallPillarItem extends BlockItem {
         for (BlockPos pos : blockPosList) {
             if (!level.getBlockState(pos).canBeReplaced()) {
                 Player player = blockPlaceContext.getPlayer();
-                player.displayClientMessage(Component.literal("Space Occupied"), true);
+                player.displayClientMessage(Component.literal("Espacio Ocupado..."), true);
                 return false;
             }
         }
@@ -103,7 +103,7 @@ public class WallPillarItem extends BlockItem {
         for (BlockPos otherPillar : otherPillarPosList) {
             if (level.getBlockState(otherPillar).getBlock() instanceof WallPillar && level.getBlockState(otherPillar).getValue(BlockStateProperties.FACING).getAxis() == direction.getAxis()) {
                 Player player = blockPlaceContext.getPlayer();
-                player.displayClientMessage(Component.literal("Pillar Already Exist"), true);
+                player.displayClientMessage(Component.literal("Ya existe un Pilar."), true);
                 return false;
             }
         }

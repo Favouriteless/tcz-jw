@@ -168,7 +168,7 @@
   "config.tacz.common.other.target_sound_distance": "Target Sound Distance",
   "config.tacz.common.other.target_sound_distance.desc": "The farthest sound distance of the target, including minecarts type",
   "death.attack.tacz.bullet": "%1$s was shot by %2$s",
-  "death.attack.tacz.bullet.item": "%1$s was shot by %2$s using %3$s"
+  "death.attack.tacz.bullet.item": "%1$s was shot by %2$s using %3$s",
   "item.tacz.thatch_wall": "Thatch Wall",
     "item.tacz.wooden_wall": "Wooden Wall",
     "item.tacz.stone_wall": "Stone Wall",
@@ -261,8 +261,7 @@
   
     "block.tacz.loot_crate": "Loot Crate",
   
-  
-    "creativetabe.just_wall_tab": "Just Walls Mod",
+
   
     "container.tacz.loot_crate": "Loot Crate",
   
