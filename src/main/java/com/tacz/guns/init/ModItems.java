@@ -32,6 +32,12 @@ public class ModItems {
 
    // public static RegistryObject<Item> HP_CHECKER = ITEMS.register("hp_checker", HPCheckerItem::new);
 
+
+    public static final RegistryObject<Item> THATCH_WALL_DOOR_ITEM = ITEMS.register("thatch_wall_door", () -> new WallDoorItem(ModBlocks.THATCH_WALL_DOOR.get(), new Item.Properties()));
+    public static final RegistryObject<Item> WOODEN_WALL_DOOR_ITEM = ITEMS.register("wooden_wall_door", () -> new WallDoorItem(ModBlocks.WOODEN_WALL_DOOR.get(), new Item.Properties()));
+    public static final RegistryObject<Item> STONE_WALL_DOOR_ITEM = ITEMS.register("stone_wall_door", () -> new WallDoorItem(ModBlocks.STONE_WALL_DOOR.get(), new Item.Properties()));
+    public static final RegistryObject<Item> ARMORED_WALL_DOOR_ITEM = ITEMS.register("armored_wall_door", () -> new WallDoorItem(ModBlocks.ARMORED_WALL_DOOR.get(), new Item.Properties()));
+
     public static RegistryObject<Item> BLUEPRINT_AK = ITEMS.register("blueprint_ak", BlueprintAKItem::new);
 
     public static final RegistryObject<Item> THATCH_WALL_ITEM = ITEMS.register("thatch_wall", () -> new WallItem(ModBlocks.THATCH_WALL.get(), new Item.Properties()));

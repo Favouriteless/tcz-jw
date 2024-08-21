@@ -12,10 +12,21 @@ import net.minecraft.world.level.storage.DimensionDataStorage;
 
 import javax.annotation.Nonnull;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
 
 public class DamageBlockSaveData extends SavedData {
 
     public HashMap<Long,Integer> storage = new HashMap<>();
+
+
+    public Set<BlockPos> getAllBlocks() {
+        Set<BlockPos> positions = new HashSet<>();
+        for (Long longPos : storage.keySet()) {
+            positions.add(BlockPos.of(longPos));
+        }
+        return positions;
+    }
 
     public int damageBlock(Level world, BlockPos pos, int block_damage){
         int curDamage = storage.computeIfAbsent(pos.asLong(), k->getDefaultResistance(world,pos));

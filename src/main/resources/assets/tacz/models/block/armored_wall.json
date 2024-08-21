@@ -1,9 +1,8 @@
 {
 	"credit": "Made with Blockbench",
 	"textures": {
-		"0": "tacz:block/armourwall",
-		"1": "tacz:block/armoredfloorup",
-		"particle": "tacz:block/armourwall"
+		"0": "tacz:block/armored_wall2",
+		"particle": "tacz:block/armored_wall2"
 	},
 	"elements": [
 		{
@@ -14,8 +13,8 @@
 				"east": {"uv": [0, 0, 16, 16], "texture": "#0"},
 				"south": {"uv": [0, 0, 16, 16], "texture": "#0"},
 				"west": {"uv": [0, 0, 16, 16], "texture": "#0"},
-				"up": {"uv": [0, 0, 16, 16], "texture": "#1"},
-				"down": {"uv": [0, 0, 16, 16], "texture": "#1"}
+				"up": {"uv": [0, 0, 16, 16], "texture": "#0"},
+				"down": {"uv": [0, 0, 16, 16], "texture": "#0"}
 			}
 		}
 	],

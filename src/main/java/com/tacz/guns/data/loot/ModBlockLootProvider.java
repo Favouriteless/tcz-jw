@@ -36,6 +36,7 @@ public class ModBlockLootProvider extends BlockLootSubProvider {
         this.add(ModBlocks.THATCH_WALL_WINDOW_FRAME.get(), block -> createStructureDrops(block, ModItems.STRAW_SCRAP.get()));
         this.add(ModBlocks.THATCH_WALL_PILLAR.get(), block -> createStructureDrops(block, ModItems.STRAW_SCRAP.get()));
         this.add(ModBlocks.THATCH_WALL_HATCH.get(), block -> createStructureDrops(block, ModItems.STRAW_SCRAP.get()));
+        this.add(ModBlocks.THATCH_WALL_DOOR.get(), block -> createStructureDrops(block, ModItems.STRAW_SCRAP.get()));
 
         this.add(ModBlocks.WOODEN_WALL.get(), block -> createStructureDrops(block, ModItems.WOOD_SCRAP.get()));
         this.add(ModBlocks.WOODEN_WALL_FLOOR.get(), block -> createStructureDrops(block, ModItems.WOOD_SCRAP.get()));
@@ -43,6 +44,7 @@ public class ModBlockLootProvider extends BlockLootSubProvider {
         this.add(ModBlocks.WOODEN_WALL_WINDOW_FRAME.get(), block -> createStructureDrops(block, ModItems.WOOD_SCRAP.get()));
         this.add(ModBlocks.WOODEN_WALL_PILLAR.get(), block -> createStructureDrops(block, ModItems.WOOD_SCRAP.get()));
         this.add(ModBlocks.WOODEN_WALL_HATCH.get(), block -> createStructureDrops(block, ModItems.WOOD_SCRAP.get()));
+        this.add(ModBlocks.WOODEN_WALL_DOOR.get(), block -> createStructureDrops(block, ModItems.WOOD_SCRAP.get()));
 
         this.add(ModBlocks.STONE_WALL.get(), block -> createStructureDrops(block, ModItems.STONE_SCRAP.get()));
         this.add(ModBlocks.STONE_WALL_FLOOR.get(), block -> createStructureDrops(block, ModItems.STONE_SCRAP.get()));
@@ -50,6 +52,7 @@ public class ModBlockLootProvider extends BlockLootSubProvider {
         this.add(ModBlocks.STONE_WALL_WINDOW_FRAME.get(), block -> createStructureDrops(block, ModItems.STONE_SCRAP.get()));
         this.add(ModBlocks.STONE_WALL_PILLAR.get(), block -> createStructureDrops(block, ModItems.STONE_SCRAP.get()));
         this.add(ModBlocks.STONE_WALL_HATCH.get(), block -> createStructureDrops(block, ModItems.STONE_SCRAP.get()));
+        this.add(ModBlocks.STONE_WALL_DOOR.get(), block -> createStructureDrops(block, ModItems.STONE_SCRAP.get()));
 
         this.add(ModBlocks.METAL_WALL.get(), block -> createStructureDrops(block, ModItems.METAL_SCRAP.get()));
         this.add(ModBlocks.METAL_WALL_FLOOR.get(), block -> createStructureDrops(block, ModItems.METAL_SCRAP.get()));
@@ -57,6 +60,7 @@ public class ModBlockLootProvider extends BlockLootSubProvider {
         this.add(ModBlocks.METAL_WALL_WINDOW_FRAME.get(), block -> createStructureDrops(block, ModItems.METAL_SCRAP.get()));
         this.add(ModBlocks.METAL_WALL_PILLAR.get(), block -> createStructureDrops(block, ModItems.METAL_SCRAP.get()));
         this.add(ModBlocks.METAL_WALL_HATCH.get(), block -> createStructureDrops(block, ModItems.METAL_SCRAP.get()));
+        this.add(ModBlocks.METAL_WALL_DOOR.get(), block -> createStructureDrops(block, ModItems.METAL_SCRAP.get()));
 
         this.add(ModBlocks.ARMORED_WALL.get(), block -> createStructureDrops(block, ModItems.ARMORED_SCRAP.get()));
         this.add(ModBlocks.ARMORED_WALL_FLOOR.get(), block -> createStructureDrops(block, ModItems.ARMORED_SCRAP.get()));
@@ -64,6 +68,7 @@ public class ModBlockLootProvider extends BlockLootSubProvider {
         this.add(ModBlocks.ARMORED_WALL_WINDOW_FRAME.get(), block -> createStructureDrops(block, ModItems.ARMORED_SCRAP.get()));
         this.add(ModBlocks.ARMORED_WALL_PILLAR.get(), block -> createStructureDrops(block, ModItems.ARMORED_SCRAP.get()));
         this.add(ModBlocks.ARMORED_WALL_HATCH.get(), block -> createStructureDrops(block, ModItems.ARMORED_SCRAP.get()));
+        this.add(ModBlocks.ARMORED_WALL_DOOR.get(), block -> createStructureDrops(block, ModItems.ARMORED_SCRAP.get()));
     }
 
     protected LootTable.Builder createStructureDrops(Block block, Item item) {
@@ -72,13 +77,6 @@ public class ModBlockLootProvider extends BlockLootSubProvider {
                         .add(this.applyExplosionDecay(block, LootItem.lootTableItem(item)))
                         .apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 1.0F)))
         );
-//        return createSilkTouchDispatchTable(block,
-//                this.applyExplosionDecay(block, LootItem.lootTableItem(item)
-//                        .apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 1.0F)
-//                        )
-//                    )
-//                )
-//        );
     }
 
     @Override
@@ -87,7 +85,6 @@ public class ModBlockLootProvider extends BlockLootSubProvider {
         ArrayList<RegistryObject<Block>> excludeList = new ArrayList<RegistryObject<Block>>(){
             {
                 add(METAL_WALL_WINDOW);
-                add(METAL_WALL_DOOR);
                 add(LOOT_CRATE);
             }
         };

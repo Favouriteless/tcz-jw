@@ -28,13 +28,14 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
+
 import static com.tacz.guns.blocks.abstracts.MultiBlock.TIER;
 
 
 public class SuperHammer extends Item {
 
-    public static final String modeNBTString = "tacz.hammermode";
-    public static final String extraNBTString = "tacz.hammermode_extra";
+    public static final String modeNBTString = "justwalls.hammermode";
+    public static final String extraNBTString = "justwalls.hammermode_extra";
 
     public final int MATERIAL_COUNT = 18;
 
@@ -68,14 +69,15 @@ public class SuperHammer extends Item {
         }
 
         if(mode.equals("wall") ||
-            mode.equals("floor") ||
-            mode.equals("hatch") ||
-            mode.equals("door_frame") ||
-            mode.equals("window_frame") ||
-            mode.equals("pillar_2") ||
-            mode.equals("pillar_3") ||
-            mode.equals("pillar_4") ||
-            mode.equals("pillar_5")
+                mode.equals("floor") ||
+                mode.equals("hatch") ||
+                mode.equals("door") ||
+                mode.equals("door_frame") ||
+                mode.equals("window_frame") ||
+                mode.equals("pillar_2") ||
+                mode.equals("pillar_3") ||
+                mode.equals("pillar_4") ||
+                mode.equals("pillar_5")
         ){
             RadialMenuItem radialMenuItem = RadialMenuItem.getRadialMenuItemByName(RadialMenuItem.ALL_ITEMS, mode);
 
@@ -94,7 +96,7 @@ public class SuperHammer extends Item {
                 }
             }
             else{
-                player.displayClientMessage(Component.translatable("gui.tacz.not_enough_material").append(Component.translatable(ModItems.STRAW_SCRAP.get().getDescriptionId())).append(" " + playerHas + "/" + itemStack.getCount()), true);
+                player.displayClientMessage(Component.translatable("gui.justwalls.not_enough_material").append(Component.translatable(ModItems.STRAW_SCRAP.get().getDescriptionId())).append(" " + playerHas + "/" + itemStack.getCount()), true);
             }
         }
         else if (mode.equals("upgrade")) {
@@ -119,7 +121,7 @@ public class SuperHammer extends Item {
                     }
                 }
                 else{
-                    player.displayClientMessage(Component.translatable("gui.tacz.not_enough_material").append(itemStack.getHoverName()).append(" " + playerHas + "/" + itemStack.getCount()), true);
+                    player.displayClientMessage(Component.translatable("gui.justwalls.not_enough_material").append(itemStack.getHoverName()).append(" " + playerHas + "/" + itemStack.getCount()), true);
                 }
             }
         }
@@ -131,7 +133,7 @@ public class SuperHammer extends Item {
     public void appendHoverText(ItemStack itemStack, @Nullable Level level, List<Component> list, TooltipFlag tooltipFlag) {
         if(itemStack.hasTag()){
             String tag = itemStack.getTag().getString(modeNBTString);
-            list.add(Component.translatable("tooltip.tacz.super_hammer").append(Component.translatable("gui.tacz.super_hammer."+tag)));
+            list.add(Component.translatable("tooltip.justwalls.super_hammer").append(Component.translatable("gui.justwalls.super_hammer."+tag)));
         }
         super.appendHoverText(itemStack, level, list, tooltipFlag);
     }

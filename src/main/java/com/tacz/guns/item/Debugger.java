@@ -1,5 +1,6 @@
 package com.tacz.guns.item;
 
+import com.tacz.guns.blocks.abstracts.StructureBlock;
 import com.tacz.guns.world.DamageBlockSaveData;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
@@ -22,15 +23,21 @@ public class Debugger extends Item {
             return InteractionResult.PASS;
         }
 
+        DamageBlockSaveData damageBlockSaveData = DamageBlockSaveData.get(level);
         BlockPos pos = useOnContext.getClickedPos();
         Block block = level.getBlockState(pos).getBlock();
         Player player = useOnContext.getPlayer();
 
-        DamageBlockSaveData damageBlockSaveData = DamageBlockSaveData.get(level);
+        // Si el bloque es un StructureBlock, obtener la posición del Master
+        if(block instanceof StructureBlock structureBlock){
+            pos = structureBlock.getMasterPos(level, pos, level.getBlockState(pos));
+        }
 
+        // Obtener la vida máxima y actual del bloque en la posición (del Master)
         int maxHp = damageBlockSaveData.getDefaultResistance(level, pos);
-        int currentHp = damageBlockSaveData.hasBlock(pos)? damageBlockSaveData.getBlockHP(pos): maxHp;
+        int currentHp = damageBlockSaveData.hasBlock(pos) ? damageBlockSaveData.getBlockHP(pos) : maxHp;
 
+        // Mostrar la información al jugador
         player.displayClientMessage(Component.literal(block + " " + currentHp + "/" + maxHp), false);
 
         return super.useOn(useOnContext);

@@ -6,6 +6,7 @@ import com.tacz.guns.api.entity.KnockBackModifier;
 import com.tacz.guns.api.event.common.EntityHurtByGunEvent;
 import com.tacz.guns.api.event.common.EntityKillByGunEvent;
 import com.tacz.guns.api.event.server.AmmoHitBlockEvent;
+import com.tacz.guns.blocks.abstracts.StructureBlock;
 import com.tacz.guns.client.particle.AmmoParticleSpawner;
 import com.tacz.guns.config.common.AmmoConfig;
 import com.tacz.guns.config.sync.SyncConfig;
@@ -478,30 +479,46 @@ public class EntityKineticBullet extends Projectile implements IEntityAdditional
         }
         Vec3 hitVec = result.getLocation();
         BlockPos pos = result.getBlockPos();
-        // 触发事件
-        if (MinecraftForge.EVENT_BUS.post(new AmmoHitBlockEvent(this.level(), result, this.level().getBlockState(pos), this))) {
+        BlockState blockState = this.level().getBlockState(pos);
+
+        // Trigger event
+        if (MinecraftForge.EVENT_BUS.post(new AmmoHitBlockEvent(this.level(), result, blockState, this))) {
             return;
         }
 
-        if (DamageBlockSaveData.get(level()).damageBlock(getCommandSenderWorld(), pos, blockDamage)<=0){
-            getCommandSenderWorld().destroyBlock(pos, true);
-            DamageBlockSaveData.get(level()).removeBlock(pos);
+        DamageBlockSaveData damageBlockSaveData = DamageBlockSaveData.get(this.level());
+
+        // Check if the block is a StructureBlock
+        if (blockState.getBlock() instanceof StructureBlock structureBlock) {
+            BlockPos masterPos = structureBlock.getMasterPos(this.level(), pos, blockState);
+            // Use block_damage instead of getDamage()
+            if (damageBlockSaveData.damageBlock(this.level(), masterPos, blockDamage) <= 0) {
+                structureBlock.playerWillDestroy(this.level(), masterPos, blockState, null);
+            }
+        } else {
+            // Apply damage to the block and check if it should be destroyed using block_damage
+            if (damageBlockSaveData.damageBlock(this.level(), pos, blockDamage) <= 0) {
+                this.level().destroyBlock(pos, true);
+                damageBlockSaveData.removeBlock(pos);
+            }
         }
-        // 爆炸
+
+        // Explosion logic
         if (this.hasExplosion) {
             createExplosion(this.getOwner(), this, this.explosionDamage, this.explosionRadius, this.explosionKnockback, hitVec);
-            // 爆炸直接结束不留弹孔，不处理之后的逻辑
             this.discard();
             return;
         }
-        // 弹孔与点燃特效
+
+        // Bullet hole and ignite effects
         if (this.level() instanceof ServerLevel serverLevel) {
-            BulletHoleOption bulletHoleOption = new BulletHoleOption(result.getDirection(), result.getBlockPos(), this.ammoId.toString(), this.gunId.toString());
+            BulletHoleOption bulletHoleOption = new BulletHoleOption(result.getDirection(), pos, this.ammoId.toString(), this.gunId.toString());
             serverLevel.sendParticles(bulletHoleOption, hitVec.x, hitVec.y, hitVec.z, 1, 0, 0, 0, 0);
             if (this.hasIgnite) {
                 serverLevel.sendParticles(ParticleTypes.LAVA, hitVec.x, hitVec.y, hitVec.z, 1, 0, 0, 0, 0);
             }
         }
+
         if (this.hasIgnite && AmmoConfig.IGNITE_BLOCK.get()) {
             BlockPos offsetPos = pos.relative(result.getDirection());
             if (BaseFireBlock.canBePlacedAt(this.level(), offsetPos, result.getDirection())) {
@@ -512,6 +529,7 @@ public class EntityKineticBullet extends Projectile implements IEntityAdditional
         }
         this.discard();
     }
+
 
     // 根据距离进行伤害衰减设计
     public float getDamage(Vec3 hitVec) {
