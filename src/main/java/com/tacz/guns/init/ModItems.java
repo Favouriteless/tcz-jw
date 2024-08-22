@@ -92,6 +92,19 @@ public class ModItems {
     public static final RegistryObject<Item> ARMORED_SCRAP = ITEMS.register("armored_scrap", () -> new ConstructionMaterial(new Item.Properties()));
 
     public static final RegistryObject<Item> MAGAZINE = ITEMS.register("magazine", () -> new CustomItem(new Item.Properties(), "magazine"));
+    public static final RegistryObject<Item> AWP_MAGAZINE = ITEMS.register("awp_magazine", () -> new CustomItem(new Item.Properties(), "awp_magazine"));
+
+    public static final RegistryObject<Item> AK_STOCK = ITEMS.register("ak_stock", () -> new CustomItem(new Item.Properties(), "ak_stock"));
+
+    public static final RegistryObject<Item> M4A1_MAGAZINE = ITEMS.register("m4a1_magazine", () -> new CustomItem(new Item.Properties(), "m4a1_magazine"));
+
+    public static final RegistryObject<Item> M4A1_STOCK = ITEMS.register("m4a1_stock", () -> new CustomItem(new Item.Properties(), "m4a1_stock"));
+
+    public static final RegistryObject<Item> M4A1_BODY = ITEMS.register("m4a1_body", () -> new CustomItem(new Item.Properties(), "m4a1_body"));
+
+    public static final RegistryObject<Item> M4A1_BARREL = ITEMS.register("m4a1_barrel", () -> new CustomItem(new Item.Properties(), "m4a1_barrel"));
+
+    public static final RegistryObject<Item> AN94_STOCK = ITEMS.register("an94_stock", () -> new CustomItem(new Item.Properties(), "an94_stock"));
 
 
 
