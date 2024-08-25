@@ -1,7 +1,6 @@
 package com.tacz.guns.blocks.abstracts;
 
 import com.tacz.guns.Config;
-import com.tacz.guns.config.ServerConfig;
 import com.tacz.guns.init.ModItems;
 import com.tacz.guns.util.Tiers;
 import com.tacz.guns.world.DamageBlockSaveData;

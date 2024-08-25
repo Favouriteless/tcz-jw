@@ -152,7 +152,7 @@ public class BlockEntityLootCrate extends BlockEntity implements Container, Menu
 
     @Override
     public Component getDisplayName() {
-        return Component.translatable("container.justwalls.loot_crate");
+        return Component.translatable("container.tacz.loot_crate");
     }
 
     @Nullable

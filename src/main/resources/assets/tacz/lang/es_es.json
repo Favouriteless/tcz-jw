@@ -50,6 +50,87 @@
   "gui.tacz.gun_refit.property_diagrams.accuracy": "Precisión",
   "gui.tacz.gun_refit.property_diagrams.hipfire_inaccuracy": "Disparar sin apuntar",
   "gui.tacz.gun_refit.property_diagrams.ammo_capacity": "Munición",
+
+  "item.tacz.thatch_wall": "Thatch Wall",
+  "item.tacz.wooden_wall": "Wooden Wall",
+  "item.tacz.stone_wall": "Stone Wall",
+  "item.tacz.metal_wall": "Metal Wall",
+  "item.tacz.armored_wall": "Armored Wall",
+
+  "item.tacz.thatch_wall_floor": "Thatch Floor",
+  "item.tacz.wooden_wall_floor": "Wooden Floor",
+  "item.tacz.stone_wall_floor": "Stone Floor",
+  "item.tacz.metal_wall_floor": "Metal Floor",
+  "item.tacz.armored_wall_floor": "Armored Floor",
+
+  "item.tacz.thatch_wall_window_frame": "Thatch Wall Window Frame",
+  "item.tacz.wooden_wall_window_frame": "Wooden Wall Window Frame",
+  "item.tacz.stone_wall_window_frame": "Stone Wall Window Frame",
+  "item.tacz.metal_wall_window_frame": "Metal Wall Window Frame",
+  "item.tacz.armored_wall_window_frame": "Armored Wall Window Frame",
+
+  "item.tacz.thatch_wall_door_frame": "Thatch Wall Door Frame",
+  "item.tacz.wooden_wall_door_frame": "Wooden Wall Door Frame",
+  "item.tacz.stone_wall_door_frame": "Stone Wall Door Frame",
+  "item.tacz.metal_wall_door_frame": "Metal Wall Door Frame",
+  "item.tacz.armored_wall_door_frame": "Armored Wall Door Frame",
+
+  "item.tacz.thatch_wall_door": "Thatch Door",
+  "item.tacz.wooden_wall_door": "Wooden Door",
+  "item.tacz.stone_wall_door": "Stone Door",
+  "item.tacz.metal_wall_door": "Metal Door",
+  "item.tacz.armored_wall_door": "Armored Door",
+
+  "item.tacz.loot_crate": "Loot Crate",
+  "item.tacz.super_hammer": "Super Hammer",
+
+  "block.tacz.thatch_wall": "Thatch Wall",
+  "block.tacz.wooden_wall": "Wooden Wall",
+  "block.tacz.stone_wall": "Stone Wall",
+  "block.tacz.metal_wall": "Metal Wall",
+  "block.tacz.armored_wall": "Armored Wall",
+
+
+
+  "block.tacz.thatch_wall_floor": "Thatch Floor",
+  "block.tacz.wooden_wall_floor": "Wooden Floor",
+  "block.tacz.stone_wall_floor": "Stone Floor",
+  "block.tacz.metal_wall_floor": "Metal Floor",
+  "block.tacz.armored_wall_floor": "Armored Floor",
+
+  "block.tacz.thatch_wall_window_frame": "Thatch Wall Window Frame",
+  "block.tacz.wooden_wall_window_frame": "Wooden Wall Window Frame",
+  "block.tacz.stone_wall_window_frame": "Stone Wall Window Frame",
+  "block.tacz.metal_wall_window_frame": "Metal Wall Window Frame",
+  "block.tacz.armored_wall_window_frame": "Armored Wall Window Frame",
+
+  "block.tacz.thatch_wall_door_frame": "Thatch Wall Door Frame",
+  "block.tacz.wooden_wall_door_frame": "Wooden Wall Door Frame",
+  "block.tacz.stone_wall_door_frame": "Stone Wall Door Frame",
+  "block.tacz.metal_wall_door_frame": "Metal Wall Door Frame",
+  "block.tacz.armored_wall_door_frame": "Armored Wall Door Frame",
+
+  "block.tacz.loot_crate": "Loot Crate",
+
+
+  "creativetabe.just_wall_tab": "Just Walls Mod",
+
+  "container.tacz.loot_crate": "Loot Crate",
+
+  "key.categories.tacz": "Just Walls Mod",
+  "key.tacz.gui_key": "Hammer Gui",
+
+  "gui.tacz.super_hammer.wall": "Wall",
+  "gui.tacz.super_hammer.floor": "Floor",
+  "gui.tacz.super_hammer.door_frame": "Door Frame",
+  "gui.tacz.super_hammer.window_frame": "Window Frame",
+  "gui.tacz.super_hammer.door": "Door",
+  "gui.tacz.super_hammer.upgrade": "Upgrade",
+  "gui.tacz.super_hammer.loot_crate": "Loot Crate",
+
+
+
+
   "gui.tacz.gun_refit.property_diagrams.pitch": "Retroceso vertical",
   "gui.tacz.gun_refit.property_diagrams.yaw": "Retroceso horizontal",
   "gui.tacz.gun_refit.property_diagrams.ads": "ADS",

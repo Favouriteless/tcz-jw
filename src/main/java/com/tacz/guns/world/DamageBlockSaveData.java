@@ -36,6 +36,15 @@ public class DamageBlockSaveData extends SavedData {
         return newDamage;
     }
 
+    public int repairBlock(Level world, BlockPos pos, int repairAmount) {
+        int curDamage = storage.computeIfAbsent(pos.asLong(), k -> getDefaultResistance(world, pos));
+        int maxResistance = getDefaultResistance(world, pos);
+        int newDamage = Math.min(maxResistance, curDamage + repairAmount);
+        storage.put(pos.asLong(), newDamage);
+        setDirty();
+        return newDamage;
+    }
+
     public void removeBlock(BlockPos pos){
         storage.remove(pos.asLong());
         setDirty();

@@ -1,7 +1,6 @@
 package com.tacz.guns.item;
 
 import com.tacz.guns.Config;
-import com.tacz.guns.config.ServerConfig;
 import com.tacz.guns.blocks.abstracts.StructureBlock;
 import com.tacz.guns.init.ModItems;
 import com.tacz.guns.util.*;
@@ -13,7 +12,6 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
-import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -34,8 +32,8 @@ import static com.tacz.guns.blocks.abstracts.MultiBlock.TIER;
 
 public class SuperHammer extends Item {
 
-    public static final String modeNBTString = "justwalls.hammermode";
-    public static final String extraNBTString = "justwalls.hammermode_extra";
+    public static final String modeNBTString = "tacz.hammermode";
+    public static final String extraNBTString = "tacz.hammermode_extra";
 
     public final int MATERIAL_COUNT = 18;
 
@@ -91,12 +89,12 @@ public class SuperHammer extends Item {
                     }
                     level.playSound(null, useOnContext.getClickedPos(), SoundEvents.WITHER_BREAK_BLOCK, player.getSoundSource(), 1.0F, 1.0F);
                     level.playSound(null, useOnContext.getClickedPos(), SoundEvents.ANVIL_DESTROY, player.getSoundSource(), 1.0F, 1.0F);
-                    player.getCooldowns().addCooldown(player.getMainHandItem().getItem(), 40);
+                    player.getCooldowns().addCooldown(player.getMainHandItem().getItem(), 0);
                     return InteractionResult.SUCCESS;
                 }
             }
             else{
-                player.displayClientMessage(Component.translatable("gui.justwalls.not_enough_material").append(Component.translatable(ModItems.STRAW_SCRAP.get().getDescriptionId())).append(" " + playerHas + "/" + itemStack.getCount()), true);
+                player.displayClientMessage(Component.translatable("gui.tacz.not_enough_material").append(Component.translatable(ModItems.STRAW_SCRAP.get().getDescriptionId())).append(" " + playerHas + "/" + itemStack.getCount()), true);
             }
         }
         else if (mode.equals("upgrade")) {
@@ -116,12 +114,12 @@ public class SuperHammer extends Item {
                             Utils.consumeIfAvailable(player, itemStack);
                         }
                         level.playSound(null, useOnContext.getClickedPos(), SoundEvents.ANVIL_USE, player.getSoundSource(), 1.0F, 1.0F);
-                        player.getCooldowns().addCooldown(player.getMainHandItem().getItem(), 40);
+                        player.getCooldowns().addCooldown(player.getMainHandItem().getItem(), 0);
                         return InteractionResult.SUCCESS;
                     }
                 }
                 else{
-                    player.displayClientMessage(Component.translatable("gui.justwalls.not_enough_material").append(itemStack.getHoverName()).append(" " + playerHas + "/" + itemStack.getCount()), true);
+                    player.displayClientMessage(Component.translatable("gui.tacz.not_enough_material").append(itemStack.getHoverName()).append(" " + playerHas + "/" + itemStack.getCount()), true);
                 }
             }
         }
@@ -133,7 +131,7 @@ public class SuperHammer extends Item {
     public void appendHoverText(ItemStack itemStack, @Nullable Level level, List<Component> list, TooltipFlag tooltipFlag) {
         if(itemStack.hasTag()){
             String tag = itemStack.getTag().getString(modeNBTString);
-            list.add(Component.translatable("tooltip.justwalls.super_hammer").append(Component.translatable("gui.justwalls.super_hammer."+tag)));
+            list.add(Component.translatable("tooltip.tacz.super_hammer").append(Component.translatable("gui.tacz.super_hammer."+tag)));
         }
         super.appendHoverText(itemStack, level, list, tooltipFlag);
     }

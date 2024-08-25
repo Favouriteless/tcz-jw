@@ -64,11 +64,22 @@ public class Config
 
     public static int materialPerBlock;
 
-    public static int thatchResistance = 2;
-    public static int woodenResistance = 5;
-    public static int stoneResistance = 6;
-    public static int metalResistance = 9;
-    public static int armoredResistance = 12;
+    public static int thatchResistance = 20;
+
+    public static int woodenResistance = 50;
+    public static int stoneResistance = 600;
+    public static int metalResistance = 900;
+    public static int armoredResistance = 1200;
+
+    public static int pillarThatchResistance = 25;
+
+    public static int pillarWoodResistance = 50;
+
+    public static int pillarStoneResistance = 650;
+
+    public static int pillarMetalResistance = 950;
+
+    public static int pillarArmoredResistance = 1250;
 
     public static int thatchFlammability;
     public static int thatchFireSpread;

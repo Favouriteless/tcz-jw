@@ -1,7 +1,6 @@
 package com.tacz.guns.init;
 
 import com.tacz.guns.Config;
-import com.tacz.guns.config.ServerConfig;
 import com.tacz.guns.GunMod;
 import com.tacz.guns.blocks.*;
 import com.tacz.guns.util.Tiers;
@@ -67,11 +66,11 @@ public class ModBlocks {
     public static final RegistryObject<Block> METAL_WALL_DOOR_FRAME = BLOCKS.register("metal_wall_door_frame", () -> new WallDoorFrame(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).strength(Config.metalResistance), Tiers.TIER.METAL));
     public static final RegistryObject<Block> ARMORED_WALL_DOOR_FRAME = BLOCKS.register("armored_wall_door_frame", () -> new WallDoorFrame(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).strength(Config.armoredResistance), Tiers.TIER.ARMOR));
 
-    public static final RegistryObject<Block> THATCH_WALL_PILLAR = BLOCKS.register("thatch_wall_pillar", () -> new WallPillar(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).strength(Config.thatchResistance), Tiers.TIER.THATCH));
-    public static final RegistryObject<Block> WOODEN_WALL_PILLAR = BLOCKS.register("wooden_wall_pillar", () -> new WallPillar(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).strength(Config.woodenResistance), Tiers.TIER.WOOD));
-    public static final RegistryObject<Block> STONE_WALL_PILLAR = BLOCKS.register("stone_wall_pillar", () -> new WallPillar(BlockBehaviour.Properties.copy(Blocks.COBBLESTONE).strength(Config.stoneResistance), Tiers.TIER.STONE));
-    public static final RegistryObject<Block> METAL_WALL_PILLAR = BLOCKS.register("metal_wall_pillar", () -> new WallPillar(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).strength(Config.metalResistance), Tiers.TIER.METAL));
-    public static final RegistryObject<Block> ARMORED_WALL_PILLAR = BLOCKS.register("armored_wall_pillar", () -> new WallPillar(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).strength(Config.armoredResistance), Tiers.TIER.ARMOR));
+    public static final RegistryObject<Block> THATCH_WALL_PILLAR = BLOCKS.register("thatch_wall_pillar", () -> new WallPillar(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).strength(Config.pillarThatchResistance), Tiers.TIER.THATCH));
+    public static final RegistryObject<Block> WOODEN_WALL_PILLAR = BLOCKS.register("wooden_wall_pillar", () -> new WallPillar(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).strength(Config.pillarWoodResistance), Tiers.TIER.WOOD));
+    public static final RegistryObject<Block> STONE_WALL_PILLAR = BLOCKS.register("stone_wall_pillar", () -> new WallPillar(BlockBehaviour.Properties.copy(Blocks.COBBLESTONE).strength(Config.pillarStoneResistance), Tiers.TIER.STONE));
+    public static final RegistryObject<Block> METAL_WALL_PILLAR = BLOCKS.register("metal_wall_pillar", () -> new WallPillar(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).strength(Config.pillarMetalResistance), Tiers.TIER.METAL));
+    public static final RegistryObject<Block> ARMORED_WALL_PILLAR = BLOCKS.register("armored_wall_pillar", () -> new WallPillar(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).strength(Config.pillarArmoredResistance), Tiers.TIER.ARMOR));
 
     public static final RegistryObject<Block> THATCH_WALL_HATCH = BLOCKS.register("thatch_wall_hatch", () -> new WallHatch(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).strength(Config.thatchResistance), Tiers.TIER.THATCH));
     public static final RegistryObject<Block> WOODEN_WALL_HATCH = BLOCKS.register("wooden_wall_hatch", () -> new WallHatch(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).strength(Config.woodenResistance), Tiers.TIER.WOOD));

@@ -224,6 +224,8 @@
     "block.tacz.stone_wall": "Stone Wall",
     "block.tacz.metal_wall": "Metal Wall",
     "block.tacz.armored_wall": "Armored Wall",
+
+
   
     "block.tacz.thatch_wall_floor": "Thatch Floor",
     "block.tacz.wooden_wall_floor": "Wooden Floor",
@@ -258,6 +260,13 @@
     "block.tacz.stone_wall_pillar": "Stone Wall Pillar",
     "block.tacz.metal_wall_pillar": "Metal Wall Pillar",
     "block.tacz.armored_wall_pillar": "Armored Wall Pillar",
+
+  "item.tacz.thatch_wall_door": "Thatch Door",
+  "item.tacz.wooden_wall_door": "Wooden Door",
+  "item.tacz.stone_wall_door": "Stone Door",
+  "item.tacz.metal_wall_door": "Metal Door",
+  "item.tacz.armored_wall_door": "Armored Door",
+
   
     "block.tacz.loot_crate": "Loot Crate",
   
@@ -270,6 +279,7 @@
   
     "gui.tacz.super_hammer.wall": "Wall",
     "gui.tacz.super_hammer.floor": "Floor",
+  "gui.tacz.super_hammer.door": "Door",
     "gui.tacz.super_hammer.hatch": "Hatch",
     "gui.tacz.super_hammer.door_frame": "Door Frame",
     "gui.tacz.super_hammer.window_frame": "Window Frame",

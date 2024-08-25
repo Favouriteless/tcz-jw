@@ -1,6 +1,7 @@
 package com.tacz.guns.events;
 
 import com.tacz.guns.GunMod;
+import com.tacz.guns.blocks.abstracts.StructureBlock;
 import com.tacz.guns.client.Keybindings;
 import com.tacz.guns.init.ModBlocks;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
