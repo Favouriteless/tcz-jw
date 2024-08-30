@@ -55,6 +55,8 @@ public class SuperHammer extends Item {
         if(level.isClientSide){
             return super.useOn(useOnContext);
         }
+
+
         String mode = getMode(useOnContext.getItemInHand());
         Player player = useOnContext.getPlayer();
 
@@ -106,6 +108,7 @@ public class SuperHammer extends Item {
             BlockState blockState = level.getBlockState(useOnContext.getClickedPos());
             if(blockState.getBlock() instanceof StructureBlock structureBlock){
                 DamageBlockSaveData damageBlockSaveData = DamageBlockSaveData.get(level);
+                blockPos = structureBlock.getMasterPos(level, blockPos, blockState);
                 if(damageBlockSaveData.hasBlock(blockPos) && damageBlockSaveData.blockFullHP(level, blockPos)){
                     player.displayClientMessage(Component.literal("Already Full HP"), true);
                     return InteractionResult.FAIL;

@@ -30,6 +30,9 @@ public class DamageBlockSaveData extends SavedData {
         return positions;
     }
 
+
+
+
     public int damageBlock(Level world, BlockPos pos, int block_damage){
         int curDamage = storage.computeIfAbsent(pos.asLong(), k->getDefaultResistance(world,pos));
         int newDamage = Math.max(0,curDamage-block_damage);
