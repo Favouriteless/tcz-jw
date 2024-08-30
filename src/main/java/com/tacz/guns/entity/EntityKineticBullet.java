@@ -9,6 +9,7 @@ import com.tacz.guns.api.event.server.AmmoHitBlockEvent;
 import com.tacz.guns.blocks.abstracts.StructureBlock;
 import com.tacz.guns.client.particle.AmmoParticleSpawner;
 import com.tacz.guns.config.common.AmmoConfig;
+import com.tacz.guns.config.common.WallConfig;
 import com.tacz.guns.config.sync.SyncConfig;
 import com.tacz.guns.config.util.HeadShotAABBConfigRead;
 import com.tacz.guns.init.ModDamageTypes;
@@ -66,6 +67,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.function.Predicate;
+
+import static com.tacz.guns.Config.destructionMode;
 
 /**
  * 动能武器打出的子弹实体。
@@ -495,13 +498,35 @@ public class EntityKineticBullet extends Projectile implements IEntityAdditional
             if (damageBlockSaveData.damageBlock(this.level(), masterPos, blockDamage) <= 0) {
                 structureBlock.playerWillDestroy(this.level(), masterPos, blockState, null);
             }
-        } else {
-            // Apply damage to the block and check if it should be destroyed using block_damage
-            if (damageBlockSaveData.damageBlock(this.level(), pos, blockDamage) <= 0) {
-                this.level().destroyBlock(pos, true);
-                damageBlockSaveData.removeBlock(pos);
+        }
+
+        if(destructionMode == 0){
+            return;
+        }
+        Level level = this.level();
+
+
+        if(blockState.getBlock() instanceof StructureBlock structureBlock){
+            BlockPos masterPos = structureBlock.getMasterPos(level, pos, blockState);
+            if (damageBlockSaveData.damageBlock(level, masterPos, (int)blockDamage)<=0){
+                structureBlock.playerWillDestroy(level, masterPos, blockState, null);
             }
         }
+
+        if (destructionMode == 2) {
+            if(WallConfig.WHITELIST.get().contains(ForgeRegistries.BLOCKS.getKey(blockState.getBlock()).toString())){
+                if (damageBlockSaveData.damageBlock(level, pos, (int)blockDamage)<=0){
+                    level.destroyBlock(pos, true);
+                }
+            }
+        }
+
+        else if(destructionMode == 3){
+            if (damageBlockSaveData.damageBlock(level, pos, (int)blockDamage)<=0){
+                level.destroyBlock(pos, true);
+            }
+        }
+
 
         // Explosion logic
         if (this.hasExplosion) {
