@@ -1,13 +1,13 @@
-package com.tacz.guns.events;
+/*package com.tacz.guns.events;
 
 
 
-import com.tacz.guns.Config;
+
+import com.tacz.guns.blocks.WallDoor;
 import com.tacz.guns.blocks.abstracts.StructureBlock;
-import com.tacz.guns.util.Utils;
+import com.tacz.guns.config.common.WallConfig;
 import com.tacz.guns.world.DamageBlockSaveData;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
@@ -16,7 +16,7 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.event.level.BlockEvent;
 import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.registries.ForgeRegistries;
+import com.tacz.guns.config.common.WallConfig;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -31,8 +31,8 @@ public class TACZEventHandler {
     private final Method getAmmo;
     private final Method getDamage;
 
-    //private final int destructionMode = Config.destructionMode;
-    //private final List<? extends String> whiteList = Config.destructionWhiteList;
+    private final int destructionMode = WallConfig.destructionMode;
+    private final List<? extends String> whiteList = WallConfig.destructionWhiteList;
 
 
     public TACZEventHandler(Class<?> ammoHitBlockEventClass, Class<?> entityKineticBulletClass) throws NoSuchMethodException {
@@ -90,7 +90,7 @@ public class TACZEventHandler {
                 if (damageBlockSaveData.damageBlock(level, pos, (int)damage)<=0){
                     level.destroyBlock(pos, true);
                 }
-            */}
+            }
       //  }
     }
-}
+}*/

@@ -1,4 +1,4 @@
-package com.tacz.guns.blocks;
+/*package com.tacz.guns.blocks;
 
 import com.tacz.guns.blockEntity.BlockEntityLootCrate;
 import com.tacz.guns.blocks.abstracts.MultiBlock;
@@ -181,4 +181,4 @@ public class LootCrate extends MultiBlock implements EntityBlock {
         }
         return null;
     }
-}
+}*/

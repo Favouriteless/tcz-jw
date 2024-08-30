@@ -1,9 +1,12 @@
 package com.tacz.guns.util;
 
+import com.tacz.guns.config.common.WallConfig;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 
 public class Utils {
     public static void debug(Object ... objects){
@@ -42,5 +45,33 @@ public class Utils {
                 }
             }
         }
+    }
+
+    public static float getStrength(Tiers.TIER tier){
+        return switch (tier){
+            case THATCH -> WallConfig.THATCH_RESISTANCE.get().floatValue();
+            case WOOD -> WallConfig.WOODEN_RESISTANCE.get().floatValue();
+            case STONE -> WallConfig.STONE_RESISTANCE.get().floatValue();
+            case METAL -> WallConfig.METAL_RESISTANCE.get().floatValue();
+            case ARMOR -> WallConfig.ARMORED_RESISTANCE.get().floatValue();
+        };
+    }
+
+    public static float getStrengthNoConfig(Tiers.TIER tier){
+        return switch (tier){
+            case THATCH -> 3 * 2;
+            case WOOD -> 5 * 2;
+            case STONE -> 7.5f * 2;
+            case METAL -> 10 * 2;
+            case ARMOR -> 12.5f * 2;
+        };
+    }
+
+    public static BlockBehaviour.Properties getBaseProperty(Tiers.TIER tier){
+        return switch (tier){
+            case THATCH, WOOD -> BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS);
+            case STONE -> BlockBehaviour.Properties.copy(Blocks.COBBLESTONE);
+            case METAL, ARMOR -> BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK);
+        };
     }
 }

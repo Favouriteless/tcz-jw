@@ -1,4 +1,4 @@
-package com.tacz.guns.item;
+/*package com.tacz.guns.item;
 
 import com.tacz.guns.blocks.LootCrate;
 import net.minecraft.core.BlockPos;
@@ -90,3 +90,4 @@ public class LootCrateItem extends BlockItem {
                 .setValue(MASTER, false);
     }
 }
+*/

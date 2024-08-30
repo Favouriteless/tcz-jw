@@ -4,6 +4,7 @@ import com.tacz.guns.api.resource.ResourceManager;
 import com.tacz.guns.config.ClientConfig;
 import com.tacz.guns.config.CommonConfig;
 import com.tacz.guns.config.ServerConfig;
+import com.tacz.guns.config.common.WallConfig;
 import com.tacz.guns.init.*;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -21,7 +22,7 @@ public class GunMod {
     public static final String MOD_ID = "tacz";
     public static final Logger LOGGER = LogManager.getLogger(MOD_ID);
 
-    public static Config CONFIG = new Config();
+    public static WallConfig CONFIG = new WallConfig();
 
 
     public static boolean IS_HOLDING_WEAPON = false;
@@ -38,6 +39,7 @@ public class GunMod {
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, CommonConfig.init());
         ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, ServerConfig.init());
         ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, ClientConfig.init());
+
 
         MinecraftForge.EVENT_BUS.register(this);
 

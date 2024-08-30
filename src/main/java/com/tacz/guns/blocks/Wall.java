@@ -15,10 +15,11 @@ import java.util.ArrayList;
 
 public class Wall extends StructureBlock {
 
-    public Wall(Properties properties, Tiers.TIER tier) {
-        super(properties);
+    public Wall(Tiers.TIER tier){
+        super(tier);
         registerDefaultState(defaultBlockState().setValue(BlockStateProperties.FACING, Direction.NORTH).setValue(MASTER, false).setValue(TIER, tier));
     }
+
 
     @Override
     protected Boolean isMaster(BlockState blockState, BlockState self){

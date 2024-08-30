@@ -13,8 +13,8 @@ import java.util.ArrayList;
 
 public class WallWindow extends StructureBlock {
 
-    public WallWindow(Properties properties, Tiers.TIER tier) {
-        super(properties);
+    public WallWindow(Tiers.TIER tier){
+        super(tier);
         registerDefaultState(defaultBlockState().setValue(BlockStateProperties.FACING, Direction.NORTH).setValue(MASTER, false).setValue(TIER, tier));
     }
 

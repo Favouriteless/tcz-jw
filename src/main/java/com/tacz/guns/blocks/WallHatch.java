@@ -14,8 +14,9 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import java.util.ArrayList;
 
 public class WallHatch extends StructureBlock {
-    public WallHatch(Properties properties, Tiers.TIER tier) {
-        super(properties);
+
+    public WallHatch(Tiers.TIER tier){
+        super(tier);
         registerDefaultState(defaultBlockState().setValue(BlockStateProperties.FACING, Direction.NORTH).setValue(MASTER, false).setValue(TIER, tier));
     }
 

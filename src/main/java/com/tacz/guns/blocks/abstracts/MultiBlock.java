@@ -16,11 +16,16 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 public abstract class MultiBlock extends Block {
     public static BooleanProperty MASTER = BooleanProperty.create("master");
     public static EnumProperty<Tiers.TIER> TIER = EnumProperty.create("tier", Tiers.TIER.class);
+    public Tiers.TIER tier;
 
     public static final VoxelShape NULL_SHAPE = Block.box(0, 0, 0, 0, 0, 0);
 
     public MultiBlock(Properties properties) {
         super(properties.pushReaction(PushReaction.BLOCK));
+    }
+    public MultiBlock(Properties properties, Tiers.TIER tier) {
+        super(properties.pushReaction(PushReaction.BLOCK));
+        this.tier = tier;
     }
 
     @Override

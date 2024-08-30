@@ -1,10 +1,14 @@
 package com.tacz.guns.item;
 
+
 import com.tacz.guns.Config;
 import com.tacz.guns.blocks.abstracts.StructureBlock;
+import com.tacz.guns.config.common.WallConfig;
 import com.tacz.guns.init.ModItems;
-import com.tacz.guns.util.*;
+import com.tacz.guns.util.RadialMenuItem;
 import com.tacz.guns.util.Tiers;
+import com.tacz.guns.util.Utils;
+import com.tacz.guns.world.DamageBlockSaveData;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -26,14 +30,13 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-
 import static com.tacz.guns.blocks.abstracts.MultiBlock.TIER;
 
 
 public class SuperHammer extends Item {
 
-    public static final String modeNBTString = "tacz.hammermode";
-    public static final String extraNBTString = "tacz.hammermode_extra";
+    public static final String modeNBTString = "justwalls.hammermode";
+    public static final String extraNBTString = "justwalls.hammermode_extra";
 
     public final int MATERIAL_COUNT = 18;
 
@@ -71,6 +74,7 @@ public class SuperHammer extends Item {
                 mode.equals("hatch") ||
                 mode.equals("door") ||
                 mode.equals("door_frame") ||
+                mode.equals("window") ||
                 mode.equals("window_frame") ||
                 mode.equals("pillar_2") ||
                 mode.equals("pillar_3") ||
@@ -94,9 +98,39 @@ public class SuperHammer extends Item {
                 }
             }
             else{
-                player.displayClientMessage(Component.translatable("gui.tacz.not_enough_material").append(Component.translatable(ModItems.STRAW_SCRAP.get().getDescriptionId())).append(" " + playerHas + "/" + itemStack.getCount()), true);
+                player.displayClientMessage(Component.translatable("gui.justwalls.not_enough_material").append(Component.translatable(ModItems.STRAW_SCRAP.get().getDescriptionId())).append(" " + playerHas + "/" + itemStack.getCount()), true);
             }
         }
+        else if(mode.equals("repair")){
+            BlockPos blockPos = useOnContext.getClickedPos();
+            BlockState blockState = level.getBlockState(useOnContext.getClickedPos());
+            if(blockState.getBlock() instanceof StructureBlock structureBlock){
+                DamageBlockSaveData damageBlockSaveData = DamageBlockSaveData.get(level);
+                if(damageBlockSaveData.hasBlock(blockPos) && damageBlockSaveData.blockFullHP(level, blockPos)){
+                    player.displayClientMessage(Component.literal("Already Full HP"), true);
+                    return InteractionResult.FAIL;
+                }
+                else{
+                    ItemStack itemStack = structureBlock.getRequiredItemForRepair(blockState);
+                    int playerHas = Utils.countMaterialInInventory(player.getInventory(), itemStack.getItem());
+                    if(playerHas >= itemStack.getCount() || player.isCreative()){
+                        InteractionResult interactionResult = structureBlock.repair(level, blockPos, blockState);
+                        if(interactionResult == InteractionResult.SUCCESS){
+                            if(!player.isCreative()){
+                                Utils.consumeIfAvailable(player, itemStack);
+                            }
+                            level.playSound(null, useOnContext.getClickedPos(), SoundEvents.ANVIL_USE, player.getSoundSource(), 1.0F, 1.0F);
+                            player.getCooldowns().addCooldown(player.getMainHandItem().getItem(), 10);
+                            return InteractionResult.SUCCESS;
+                        }
+                    }
+                    else{
+                        player.displayClientMessage(Component.translatable("gui.justwalls.not_enough_material").append(itemStack.getHoverName()).append(" " + playerHas + "/" + itemStack.getCount()), true);
+                    }
+                }
+            }
+        }
+
         else if (mode.equals("upgrade")) {
             BlockPos blockPos = useOnContext.getClickedPos();
             BlockState blockState = level.getBlockState(useOnContext.getClickedPos());
@@ -119,7 +153,7 @@ public class SuperHammer extends Item {
                     }
                 }
                 else{
-                    player.displayClientMessage(Component.translatable("gui.tacz.not_enough_material").append(itemStack.getHoverName()).append(" " + playerHas + "/" + itemStack.getCount()), true);
+                    player.displayClientMessage(Component.translatable("gui.justwalls.not_enough_material").append(itemStack.getHoverName()).append(" " + playerHas + "/" + itemStack.getCount()), true);
                 }
             }
         }
@@ -131,7 +165,7 @@ public class SuperHammer extends Item {
     public void appendHoverText(ItemStack itemStack, @Nullable Level level, List<Component> list, TooltipFlag tooltipFlag) {
         if(itemStack.hasTag()){
             String tag = itemStack.getTag().getString(modeNBTString);
-            list.add(Component.translatable("tooltip.tacz.super_hammer").append(Component.translatable("gui.tacz.super_hammer."+tag)));
+            list.add(Component.translatable("tooltip.justwalls.super_hammer").append(Component.translatable("gui.justwalls.super_hammer."+tag)));
         }
         super.appendHoverText(itemStack, level, list, tooltipFlag);
     }
@@ -174,7 +208,7 @@ public class SuperHammer extends Item {
 
 
     private ItemStack getRequiredItemForConstruction(String mode){
-        int materialPerBlock = Config.materialPerBlock;
+        int materialPerBlock = WallConfig.MATERIAL_PER_BLOCK.get();
         return switch (mode){
             case "wall", "floor" -> new ItemStack(ModItems.STRAW_SCRAP.get(), materialPerBlock * 9);
             case "door_frame" -> new ItemStack(ModItems.STRAW_SCRAP.get(), materialPerBlock * 7);

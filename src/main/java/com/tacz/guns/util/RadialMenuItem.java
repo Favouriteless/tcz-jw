@@ -73,10 +73,14 @@ public class RadialMenuItem {
     public static final RadialMenuItem FLOOR = new RadialMenuItem("floor", ModItems.THATCH_WALL_FLOOR_ITEM.get());
     public static final RadialMenuItem HATCH = new RadialMenuItem("hatch", ModItems.THATCH_WALL_HATCH_ITEM.get());
     public static final RadialMenuItem DOOR_FRAME = new RadialMenuItem("door_frame", ModItems.THATCH_WALL_DOOR_FRAME_ITEM.get());
+
+    public static final RadialMenuItem WINDOW = new RadialMenuItem("window", ModItems.THATCH_WALL_WINDOW_ITEM.get());
     public static final RadialMenuItem DOOR = new RadialMenuItem("door", ModItems.THATCH_WALL_DOOR_ITEM.get());
     public static final RadialMenuItem WINDOW_FRAME = new RadialMenuItem("window_frame", ModItems.THATCH_WALL_WINDOW_FRAME_ITEM.get());
     public static final RadialMenuItem WALL_PILLAR = new RadialMenuItem("wall_pillar", ModItems.THATCH_WALL_PILLAR_ITEM_3.get(), PILLAR_MENU);
     public static final RadialMenuItem UPGRADE = new RadialMenuItem("upgrade", ModItems.SUPER_HAMMER.get());
+
+    public static final RadialMenuItem REPAIR = new RadialMenuItem("repair", ModItems.SUPER_HAMMER.get());
 
 
     public static final ArrayList<RadialMenuItem> MAIN_MENU = new ArrayList<>(){
@@ -85,27 +89,30 @@ public class RadialMenuItem {
             add(FLOOR);
             add(HATCH);
             add(DOOR);
+            add(WINDOW);
             add(DOOR_FRAME);
             add(WINDOW_FRAME);
             add(WALL_PILLAR);
             add(UPGRADE);
+            add(REPAIR);
         }
     };
 
     public static final ArrayList<RadialMenuItem> ALL_ITEMS = new ArrayList<>(){
         {
-            //add(RadialMenuItem.PILLAR_2);
-            add(RadialMenuItem.PILLAR_3);
-            add(RadialMenuItem.PILLAR_4);
-            add(RadialMenuItem.PILLAR_5);
-            add(RadialMenuItem.WALL);
-            add(RadialMenuItem.FLOOR);
-            add(RadialMenuItem.HATCH);
-            add(RadialMenuItem.DOOR);
-            add(RadialMenuItem.DOOR_FRAME);
-            add(RadialMenuItem.WINDOW_FRAME);
-            add(RadialMenuItem.WALL_PILLAR);
-            add(RadialMenuItem.UPGRADE);
+            add(PILLAR_3);
+            add(PILLAR_4);
+            add(PILLAR_5);
+            add(WALL);
+            add(FLOOR);
+            add(HATCH);
+            add(DOOR);
+            add(DOOR_FRAME);
+            add(WINDOW);
+            add(WINDOW_FRAME);
+            add(WALL_PILLAR);
+            add(UPGRADE);
+            add(REPAIR);
         }
     };
 }

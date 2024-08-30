@@ -1,5 +1,7 @@
 package com.tacz.guns.world;
 
+import com.tacz.guns.blocks.abstracts.StructureBlock;
+import com.tacz.guns.util.Utils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
@@ -7,6 +9,7 @@ import net.minecraft.nbt.Tag;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.saveddata.SavedData;
 import net.minecraft.world.level.storage.DimensionDataStorage;
 
@@ -19,7 +22,6 @@ public class DamageBlockSaveData extends SavedData {
 
     public HashMap<Long,Integer> storage = new HashMap<>();
 
-
     public Set<BlockPos> getAllBlocks() {
         Set<BlockPos> positions = new HashSet<>();
         for (Long longPos : storage.keySet()) {
@@ -31,15 +33,6 @@ public class DamageBlockSaveData extends SavedData {
     public int damageBlock(Level world, BlockPos pos, int block_damage){
         int curDamage = storage.computeIfAbsent(pos.asLong(), k->getDefaultResistance(world,pos));
         int newDamage = Math.max(0,curDamage-block_damage);
-        storage.put(pos.asLong(), newDamage);
-        setDirty();
-        return newDamage;
-    }
-
-    public int repairBlock(Level world, BlockPos pos, int repairAmount) {
-        int curDamage = storage.computeIfAbsent(pos.asLong(), k -> getDefaultResistance(world, pos));
-        int maxResistance = getDefaultResistance(world, pos);
-        int newDamage = Math.min(maxResistance, curDamage + repairAmount);
         storage.put(pos.asLong(), newDamage);
         setDirty();
         return newDamage;
@@ -63,10 +56,17 @@ public class DamageBlockSaveData extends SavedData {
     }
 
     public int getDefaultResistance(LevelAccessor world, BlockPos pos){
-        double resistance = world.getBlockState(pos).getBlock().getExplosionResistance();
-        return (int) (resistance*100d);
+        Block block = world.getBlockState(pos).getBlock();
+        if(block instanceof StructureBlock structureBlock){
+            return (int)(Utils.getStrength(structureBlock.tier) * 100);
+        }
+        return (int)(block.getExplosionResistance()*100d);
     }
 
+
+    public boolean blockFullHP(LevelAccessor level, BlockPos pos){
+        return getBlockHP(pos) == getDefaultResistance(level, pos);
+    }
     @Nonnull
     public static DamageBlockSaveData get(LevelAccessor level) {
         if (level.isClientSide()) {
@@ -89,6 +89,7 @@ public class DamageBlockSaveData extends SavedData {
             storage.put(pos, currentHp);
         }
     }
+
 
     @Override
     public CompoundTag save(CompoundTag tag) {

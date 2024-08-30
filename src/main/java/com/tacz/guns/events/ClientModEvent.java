@@ -18,9 +18,13 @@ public final class ClientModEvent {
     @SubscribeEvent
     public static void clientSetup(FMLClientSetupEvent event){
         event.enqueueWork(()->{
-            ItemBlockRenderTypes.setRenderLayer(ModBlocks.LOOT_CRATE.get(), RenderType.cutout());
+          //  ItemBlockRenderTypes.setRenderLayer(ModBlocks.LOOT_CRATE.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(ModBlocks.THATCH_WALL_WINDOW.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(ModBlocks.WOODEN_WALL_WINDOW.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(ModBlocks.STONE_WALL_WINDOW.get(), RenderType.cutout());
             ItemBlockRenderTypes.setRenderLayer(ModBlocks.METAL_WALL_WINDOW.get(), RenderType.cutout());
-            ItemBlockRenderTypes.setRenderLayer(ModBlocks.METAL_WALL_DOOR.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(ModBlocks.ARMORED_WALL_WINDOW.get(), RenderType.cutout());
+//            ItemBlockRenderTypes.setRenderLayer(ModBlocks.METAL_WALL_DOOR.get(), RenderType.cutout());
         });
     }
 
