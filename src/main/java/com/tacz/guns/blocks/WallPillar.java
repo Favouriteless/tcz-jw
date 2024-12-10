@@ -2,7 +2,6 @@ package com.tacz.guns.blocks;
 
 import com.tacz.guns.blocks.abstracts.StructureBlock;
 import com.tacz.guns.init.ModBlocks;
-import com.tacz.guns.init.ModItems;
 import com.tacz.guns.util.Tiers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -19,15 +18,16 @@ import java.util.ArrayList;
 public class WallPillar extends StructureBlock {
     public static IntegerProperty HEIGHT = IntegerProperty.create("height", 2, 5);
 
-    public WallPillar(Tiers.TIER tier){
-        super(tier);
+    public WallPillar(Properties properties, Tiers.TIER tier) {
+        super(properties);
         registerDefaultState(defaultBlockState().setValue(BlockStateProperties.FACING, Direction.NORTH).setValue(MASTER, false).setValue(TIER, tier).setValue(HEIGHT, 3));
     }
 
-    public WallPillar(Properties properties, Tiers.TIER tier) {
-        super(properties, tier);
-        registerDefaultState(defaultBlockState().setValue(BlockStateProperties.FACING, Direction.NORTH).setValue(MASTER, false).setValue(TIER, tier).setValue(HEIGHT, 3));
+    public WallPillar(Properties properties, Tiers.TIER tier, int height) {
+        super(properties);
+        registerDefaultState(defaultBlockState().setValue(BlockStateProperties.FACING, Direction.NORTH).setValue(MASTER, false).setValue(TIER, tier).setValue(HEIGHT, height));
     }
+
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         super.createBlockStateDefinition(builder);

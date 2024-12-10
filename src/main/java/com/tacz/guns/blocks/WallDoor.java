@@ -4,7 +4,6 @@ import com.tacz.guns.blocks.abstracts.StructureBlock;
 import com.tacz.guns.init.ModBlocks;
 import com.tacz.guns.util.DoorVoxelShapes;
 import com.tacz.guns.util.Tiers;
-import com.tacz.guns.util.Utils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionHand;
@@ -21,7 +20,6 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.phys.BlockHitResult;
-import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -34,8 +32,8 @@ public class WallDoor extends StructureBlock {
     public static BooleanProperty OPEN = BooleanProperty.create("open");
     public static IntegerProperty INDEX = IntegerProperty.create("index", 0, 8);
 
-    public WallDoor(Tiers.TIER tier){
-        super(tier);
+    public WallDoor(Properties properties, Tiers.TIER tier) {
+        super(properties);
         registerDefaultState(defaultBlockState().setValue(BlockStateProperties.FACING, Direction.NORTH).setValue(MASTER, false).setValue(TIER, tier).setValue(INDEX, 0));
     }
 

@@ -1,4 +1,4 @@
-/*package com.tacz.guns.blockEntity;
+package com.tacz.guns.blockEntity;
 
 import com.tacz.guns.init.ModBlockEntity;
 import net.minecraft.core.BlockPos;
@@ -161,4 +161,3 @@ public class BlockEntityLootCrate extends BlockEntity implements Container, Menu
         return ChestMenu.sixRows(id, inventory, this);
     }
 }
-*/

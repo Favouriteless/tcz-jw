@@ -1,6 +1,5 @@
 package com.tacz.guns.blocks.abstracts;
 
-
 import com.tacz.guns.Config;
 import com.tacz.guns.config.common.WallConfig;
 import com.tacz.guns.init.ModItems;
@@ -15,21 +14,15 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
-import com.tacz.guns.util.Utils;
-import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.Explosion;
 
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
 public abstract class StructureBlock extends MultiBlock {
-    public StructureBlock(Tiers.TIER tier) {
-        super(Utils.getBaseProperty(tier).strength(Utils.getStrengthNoConfig(tier)), tier);
+    public StructureBlock(Properties properties) {
+        super(properties);
     }
 
-    public StructureBlock(Properties properties, Tiers.TIER tier) {
-        super(properties.strength(Utils.getStrengthNoConfig(tier)), tier);
-    }
 
     protected abstract Boolean isMaster(BlockState blockState, BlockState self);
 
@@ -59,29 +52,6 @@ public abstract class StructureBlock extends MultiBlock {
     protected Block getNextTierBlock(Tiers.TIER tier){
         return Blocks.AIR;
     }
-
-
-    @Override
-    public void onBlockExploded(BlockState state, Level level, BlockPos pos, Explosion explosion) {
-        if(level.isClientSide()){
-            return;
-        }
-
-        Boolean isMaster = state.getValue(MASTER);
-
-        if(isMaster){
-            masterBreak(level, pos, state);
-            return;
-        }
-
-        BlockPos masterPos = getMasterPos(level, pos, state);
-        if(masterPos != null){
-            StructureBlock masterWall = (StructureBlock)level.getBlockState(masterPos).getBlock();
-            masterWall.masterBreak(level, masterPos, level.getBlockState(masterPos));
-        }
-        super.onBlockExploded(state, level, pos, explosion);
-    }
-
 
     @Override
     public void playerWillDestroy(Level level, BlockPos blockPos, BlockState blockState, Player player) {
@@ -151,29 +121,6 @@ public abstract class StructureBlock extends MultiBlock {
         super.onRemove(prevBlockState, level, blockPos, newBlockState, flag);
     }
 
-    public InteractionResult repair(LevelAccessor level, BlockPos blockPos, BlockState blockState){
-        if(level.isClientSide()){
-            return InteractionResult.PASS;
-        }
-
-        Boolean isMaster = blockState.getValue(MASTER);
-        if(isMaster){
-            DamageBlockSaveData damageBlockSaveData = DamageBlockSaveData.get(level);
-
-            int currentHP = damageBlockSaveData.getBlockHP(blockPos);
-            int maxHP = damageBlockSaveData.getDefaultResistance(level, blockPos);
-            int newHP = Math.min(maxHP, currentHP + (int)(maxHP * WallConfig.REPAIR_PERCENTAGE.get()) + WallConfig.REPAIR_AMOUNT.get());
-            damageBlockSaveData.setBlockHP(blockPos, newHP);
-            return InteractionResult.SUCCESS;
-        }
-        BlockPos masterPos = getMasterPos(level, blockPos, blockState);
-        if(masterPos != null){
-            StructureBlock masterWall = (StructureBlock)level.getBlockState(masterPos).getBlock();
-            return masterWall.repair(level, masterPos, level.getBlockState(masterPos));
-        }
-        return InteractionResult.FAIL;
-    }
-
     public InteractionResult upgrade(LevelAccessor level, BlockPos blockPos, BlockState blockState) {
         if(level.isClientSide()){
             return InteractionResult.PASS;
@@ -213,6 +160,30 @@ public abstract class StructureBlock extends MultiBlock {
         return InteractionResult.FAIL;
     }
 
+    public InteractionResult repair(LevelAccessor level, BlockPos blockPos, BlockState blockState){
+        if(level.isClientSide()){
+            return InteractionResult.PASS;
+        }
+
+        Boolean isMaster = blockState.getValue(MASTER);
+        if(isMaster){
+            DamageBlockSaveData damageBlockSaveData = DamageBlockSaveData.get(level);
+
+            int currentHP = damageBlockSaveData.getBlockHP(blockPos);
+            int maxHP = damageBlockSaveData.getDefaultResistance(level, blockPos);
+            int newHP = Math.min(maxHP, currentHP + (int)(maxHP * WallConfig.REPAIR_PERCENTAGE.get()) + WallConfig.REPAIR_AMOUNT.get());
+            damageBlockSaveData.setBlockHP(blockPos, newHP);
+            return InteractionResult.SUCCESS;
+        }
+        BlockPos masterPos = getMasterPos(level, blockPos, blockState);
+        if(masterPos != null){
+            StructureBlock masterWall = (StructureBlock)level.getBlockState(masterPos).getBlock();
+            return masterWall.repair(level, masterPos, level.getBlockState(masterPos));
+        }
+        return InteractionResult.FAIL;
+    }
+
+
     public ItemStack getRequiredItemForUpgrade(BlockState blockState){
         return getRequiredItemForUpgrade(blockState, 9);
     }
@@ -227,6 +198,7 @@ public abstract class StructureBlock extends MultiBlock {
             default -> new ItemStack(ModItems.STRAW_SCRAP.get(), numberBlocks * materialPerBlock);
         };
     }
+
 
     public ItemStack getRequiredItemForRepair(BlockState blockState){
         int materialRepair = WallConfig.MATERIAL_REPAIR.get();

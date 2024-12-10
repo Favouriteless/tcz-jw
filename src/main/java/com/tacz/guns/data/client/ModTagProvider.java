@@ -2,7 +2,6 @@ package com.tacz.guns.data.client;
 
 
 import com.tacz.guns.init.ModBlocks;
-import com.tacz.guns.util.ModTags;
 import com.tacz.guns.GunMod;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;

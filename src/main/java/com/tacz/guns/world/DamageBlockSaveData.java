@@ -59,17 +59,13 @@ public class DamageBlockSaveData extends SavedData {
     }
 
     public int getDefaultResistance(LevelAccessor world, BlockPos pos){
-        Block block = world.getBlockState(pos).getBlock();
-        if(block instanceof StructureBlock structureBlock){
-            return (int)(Utils.getStrength(structureBlock.tier) * 100);
-        }
-        return (int)(block.getExplosionResistance()*100d);
-    }
+        double resistance = world.getBlockState(pos).getBlock().getExplosionResistance();
+        return (int) (resistance*100d);}
 
 
-    public boolean blockFullHP(LevelAccessor level, BlockPos pos){
-        return getBlockHP(pos) == getDefaultResistance(level, pos);
-    }
+     public boolean blockFullHP(LevelAccessor level, BlockPos pos){
+         return getBlockHP(pos) == getDefaultResistance(level, pos);
+     }
     @Nonnull
     public static DamageBlockSaveData get(LevelAccessor level) {
         if (level.isClientSide()) {

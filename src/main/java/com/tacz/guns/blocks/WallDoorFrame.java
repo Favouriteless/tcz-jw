@@ -2,7 +2,6 @@ package com.tacz.guns.blocks;
 
 import com.tacz.guns.blocks.abstracts.StructureBlock;
 import com.tacz.guns.init.ModBlocks;
-import com.tacz.guns.init.ModItems;
 import com.tacz.guns.util.Tiers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -15,9 +14,8 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import java.util.ArrayList;
 
 public class WallDoorFrame extends StructureBlock {
-
-    public WallDoorFrame(Tiers.TIER tier){
-        super(tier);
+    public WallDoorFrame(Properties properties, Tiers.TIER tier) {
+        super(properties);
         registerDefaultState(defaultBlockState().setValue(BlockStateProperties.FACING, Direction.NORTH).setValue(MASTER, false).setValue(TIER, tier));
     }
 
