@@ -28,15 +28,19 @@ public abstract class StructureBlock extends MultiBlock {
 
     public abstract BlockPos getMasterPos(LevelAccessor level, BlockPos blockPos, BlockState blockState);
 
-    protected void masterBreak(LevelAccessor levelAccessor, BlockPos blockPos, BlockState blockState){
-        ArrayList<BlockPos> childPos = getChildPos(levelAccessor, blockPos, blockState);
-        DamageBlockSaveData damageBlockSaveData = DamageBlockSaveData.get(levelAccessor);
+    protected void masterBreak(LevelAccessor level, BlockPos pos, BlockState state){
+        ArrayList<BlockPos> childPos = getChildPos(level, pos, state);
+        DamageBlockSaveData damageBlockSaveData = DamageBlockSaveData.get(level);
         childPos.stream().forEach(blockPos1 -> {
-            levelAccessor.destroyBlock(blockPos1, true);
+            level.destroyBlock(blockPos1, true);
             if(damageBlockSaveData.hasBlock(blockPos1)) {
                 damageBlockSaveData.removeBlock(blockPos1);
             }
         });
+        if(damageBlockSaveData.hasBlock(pos))
+            damageBlockSaveData.removeBlock(pos);
+
+        damageBlockSaveData.setDirty();
     }
 
     protected void masterBreakNoDrop(LevelAccessor levelAccessor, BlockPos blockPos, BlockState blockState){
@@ -51,29 +55,6 @@ public abstract class StructureBlock extends MultiBlock {
 
     protected Block getNextTierBlock(Tiers.TIER tier){
         return Blocks.AIR;
-    }
-
-    @Override
-    public void playerWillDestroy(Level level, BlockPos blockPos, BlockState blockState, Player player) {
-
-        if(level.isClientSide()){
-            return;
-        }
-
-        Boolean isMaster = blockState.getValue(MASTER);
-
-        if(isMaster){
-            masterBreak(level, blockPos, blockState);
-            return;
-        }
-
-        BlockPos masterPos = getMasterPos(level, blockPos, blockState);
-        if(masterPos != null){
-            StructureBlock masterWall = (StructureBlock)level.getBlockState(masterPos).getBlock();
-            masterWall.masterBreak(level, masterPos, level.getBlockState(masterPos));
-        }
-
-        super.playerWillDestroy(level, blockPos, blockState, player);
     }
 
     @Override
@@ -101,22 +82,22 @@ public abstract class StructureBlock extends MultiBlock {
 
     @Override
     public void onRemove(BlockState prevBlockState, Level level, BlockPos blockPos, BlockState newBlockState, boolean flag) {
-//        if(level.isClientSide()){
-//            return;
-//        }
-//
-//        Boolean isMaster = prevBlockState.getValue(MASTER);
-//
-//        if(isMaster){
-//            masterBreak(level, blockPos, prevBlockState);
-//            return;
-//        }
-//
-//        BlockPos masterPos = this.getMasterPos(level, blockPos, prevBlockState);
-//        if(masterPos != null) {
-//            StructureBlock masterWall = (StructureBlock) level.getBlockState(masterPos).getBlock();
-//            masterWall.masterBreak(level, masterPos, level.getBlockState(masterPos));
-//        }
+        if(level.isClientSide()){
+            return;
+        }
+
+        Boolean isMaster = prevBlockState.getValue(MASTER);
+
+        if(isMaster){
+            masterBreak(level, blockPos, prevBlockState);
+            return;
+        }
+
+        BlockPos masterPos = this.getMasterPos(level, blockPos, prevBlockState);
+        if(masterPos != null) {
+            StructureBlock masterWall = (StructureBlock) level.getBlockState(masterPos).getBlock();
+            masterWall.masterBreak(level, masterPos, level.getBlockState(masterPos));
+        }
 
         super.onRemove(prevBlockState, level, blockPos, newBlockState, flag);
     }

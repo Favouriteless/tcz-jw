@@ -50,7 +50,7 @@ public class Config
     public static int woodenFlammability;
     public static int woodenFireSpread;
 
-    public static int destructionMode = 2;
+    public static int destructionMode = 1;
 
 
     public static List<? extends String> destructionWhiteList;

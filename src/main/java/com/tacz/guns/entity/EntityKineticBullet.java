@@ -489,44 +489,29 @@ public class EntityKineticBullet extends Projectile implements IEntityAdditional
             return;
         }
 
-        DamageBlockSaveData damageBlockSaveData = DamageBlockSaveData.get(this.level());
-
-        // Check if the block is a StructureBlock
-        if (blockState.getBlock() instanceof StructureBlock structureBlock) {
-            BlockPos masterPos = structureBlock.getMasterPos(this.level(), pos, blockState);
-            // Use block_damage instead of getDamage()
-            if (damageBlockSaveData.damageBlock(this.level(), masterPos, blockDamage) <= 0) {
-                structureBlock.playerWillDestroy(this.level(), masterPos, blockState, null);
-            }
-        }
-
-        if(destructionMode == 0){
-            return;
-        }
         Level level = this.level();
+        DamageBlockSaveData damageBlockSaveData = DamageBlockSaveData.get(level);
 
-
-        if(blockState.getBlock() instanceof StructureBlock structureBlock){
-            BlockPos masterPos = structureBlock.getMasterPos(level, pos, blockState);
-            if (damageBlockSaveData.damageBlock(level, masterPos, (int)blockDamage)<=0){
-                structureBlock.playerWillDestroy(level, masterPos, blockState, null);
+        if(destructionMode == 1) {
+            if(blockState.getBlock() instanceof StructureBlock structureBlock){
+                BlockPos masterPos = structureBlock.getMasterPos(level, pos, blockState);
+                if (damageBlockSaveData.damageBlock(level, masterPos, blockDamage) <= 0){
+                    level.destroyBlock(masterPos, false);
+                }
             }
         }
-
-        if (destructionMode == 2) {
+        else if(destructionMode == 2) {
             if(WallConfig.WHITELIST.get().contains(ForgeRegistries.BLOCKS.getKey(blockState.getBlock()).toString())){
-                if (damageBlockSaveData.damageBlock(level, pos, (int)blockDamage)<=0){
+                if (damageBlockSaveData.damageBlock(level, pos, blockDamage) <= 0){
                     level.destroyBlock(pos, true);
                 }
             }
         }
-
         else if(destructionMode == 3){
-            if (damageBlockSaveData.damageBlock(level, pos, (int)blockDamage)<=0){
+            if (damageBlockSaveData.damageBlock(level, pos, blockDamage) <= 0){
                 level.destroyBlock(pos, true);
             }
         }
-
 
         // Explosion logic
         if (this.hasExplosion) {
